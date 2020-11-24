@@ -71,7 +71,7 @@ class TableOut extends React.Component {
         const panels = columns.map((item, index) => {
             const { key } = item;
             return (
-                <Panel header={`列${index + 1}`}>
+                <Panel forceRender header={`列${index + 1}`}>
                       <Form.Item
                     label="key"
                     name={`${key}-${index}`}

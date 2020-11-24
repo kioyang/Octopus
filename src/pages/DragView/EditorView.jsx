@@ -49,7 +49,6 @@ class DragInView extends React.Component {
                 const config = JSON.parse(localStorage.getItem('pageModel'));
                 const cur = JSON.parse(localStorage.getItem('curProject'));
                 const mergeConfig = Object.assign({},value, config, {baseDir: `${cur.projectDir}${cur.projectName}`,name: cur.projectName,tableColumns:value.tableColumns});
-                debugger
                 this.saveLocal(mergeConfig, data);
                 fetch('/api/sp', { method: 'POST', body: JSON.stringify(mergeConfig)})
                 .then((response) => response.json())
