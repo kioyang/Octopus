@@ -151,6 +151,14 @@ class TableOut extends React.Component {
                 >
                     <Input />
                 </Form.Item>
+                <Form.Item
+                    label="get地址"
+                    name="apiUrl"
+                    rules={[{ required: true, message: '请填写id!' }]}
+                    initialValue={curPage.apiUrl}
+                >
+                    <Input />
+                </Form.Item>
 
                 <div style={{ height: 524, overflow: 'auto', position: 'relative'}}>
               <Button style={{ position: 'absolute', top: 0,right: 0,zIndex: 101}} type="primary" onClick={this.add}>增加一列</Button>
