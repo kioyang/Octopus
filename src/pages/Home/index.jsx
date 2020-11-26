@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, message, Table, Spin, Tag,Select } from 'antd';
+import { Button, Modal, message, Table, Spin, Tag, Select, Input } from 'antd';
 import ProjectCreate from './Create/index.jsx';
 import ProjectImport from './Create/import.jsx';
 import './index.less';
@@ -50,17 +50,17 @@ class Home extends React.Component {
                     const project = projects[0];
                     const pages = project.pages || {};
                     const options = [];
-                    for(let x in pages) {
+                    for (let x in pages) {
                         const item = pages[x];
-                        options.push( <Option value={item.flowKey}>{item.title}</Option>)
+                        options.push(<Option value={item.flowKey}>{item.title}</Option>)
                     }
-                    return <Select 
-                    onChange={(value) => {
-                        this.setState({
-                            pageKey: value,
-                        })
-                    }}
-                    style={{ width: '100%'}} name="page">
+                    return <Select
+                        onChange={(value) => {
+                            this.setState({
+                                pageKey: value,
+                            })
+                        }}
+                        style={{ width: '100%' }} name="page">
                         {options}
                     </Select>
                 }
@@ -80,6 +80,19 @@ class Home extends React.Component {
                                 localStorage.setItem('curPage', JSON.stringify(curPage));
                                 location.href = '/#/edit';
                             }}>编辑</Button>
+                            <Button style={{ marginRight: 10, marginLeft: 10 }} type="primary" onClick={() => {
+                                const projects = JSON.parse(localStorage.getItem('projects'))
+                                const string = JSON.stringify(projects, null, 4);
+                                Modal.info({
+                                    width: 1000,
+                                    style: { height: 800 },
+                                    content: <div>
+                                        <Input.TextArea rows={30} value={string}>
+                                            {string}
+                                        </Input.TextArea>
+                                    </div>
+                                })
+                            }}>导出配置</Button>
                         </div>
                     )
                 }
@@ -239,6 +252,33 @@ class Home extends React.Component {
                         margin: 24
                     }}
                     type="button" value="导入项目"
+                />
+
+                <input
+                    onClick={() => {
+                        Modal.info({
+                            width: 1000,
+                            style: { height: 800 },
+                            content: <div>
+                                <Input.TextArea
+                                    onChange={(value) => {
+                                        console.log(value);
+                                    }}
+                                    rows={30}>
+                                </Input.TextArea>
+                            </div>
+                        })
+                    }}
+                    style={{
+                        cursor: 'pointer',
+                        color: '#fff',
+                        outline: 'none',
+                        border: 'none',
+                        backgroundColor: '#42B983',
+                        padding: '8px 14px',
+                        margin: 24
+                    }}
+                    type="button" value="导入配置"
                 />
 
                 <input

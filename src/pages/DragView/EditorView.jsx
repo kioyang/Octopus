@@ -50,10 +50,13 @@ class DragInView extends React.Component {
                 const cur = JSON.parse(localStorage.getItem('curProject'));
                 const mergeConfig = Object.assign({},value, config, {baseDir: `${cur.projectDir}${cur.projectName}`,name: cur.projectName,tableColumns:value.tableColumns});
                 this.saveLocal(mergeConfig, data);
+                message.loading('同步中');
                 fetch('/api/sp', { method: 'POST', body: JSON.stringify(mergeConfig)})
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data, 'data');
+                    message.destroy();
+                    message.success('同步完成');
                     this.setState({ loading: false});
                 });
                 return;

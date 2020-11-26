@@ -24,13 +24,13 @@ class TableOut extends React.Component {
         keys.map((item, index) => {
             const [vKey, vIndex] = item && item.split('-');
             console.log(vKey, vIndex, 'key:index', index);
-            if (item.includes('Name-') && value[item] && value[item].trim()) {
+            if (item.includes('LiuName-') && value[item] && value[item].trim()) {
                 console.log(item, 'item');
-                result.push({ key: value[item.replace('Name', '')], keyName: value[item],
-                isInTable: value[item.replace('Name', 'ShowInTable')],
-                isInForm: value[item.replace('Name', 'ShowInForm')],
-                isInSearch: value[item.replace('Name', 'ShowInSearch')],
-                type: value[item.replace('Name', 'Type')],
+                result.push({ key: value[item.replace('LiuName', '')], keyName: value[item],
+                isInTable: value[item.replace('LiuName', 'ShowInTable')],
+                isInForm: value[item.replace('LiuName', 'ShowInForm')],
+                isInSearch: value[item.replace('LiuName', 'ShowInSearch')],
+                type: value[item.replace('LiuName', 'Type')],
             });
             }
         });
@@ -75,15 +75,15 @@ class TableOut extends React.Component {
                       <Form.Item
                     label="key"
                     name={`${key}-${index}`}
-                    initialValue={item.key}
+                    initialValue={item.key && item.key.trim()}
                     rules={[{ required: true, message: '请填写文件夹名称!' }]}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
                     label="name"
-                    name={`${key}Name-${index}`}
-                    initialValue={item.keyName}
+                    name={`${key}LiuName-${index}`}
+                    initialValue={item.keyName && item.keyName.trim()}
                     rules={[{ required: true, message: '请填写flowKey!' }]}
                 >
                     <Input />
@@ -115,7 +115,7 @@ class TableOut extends React.Component {
                 <Form.Item
                     label="类型"
                     name={`${key}Type-${index}`}
-                    initialValue={item.type}
+                    initialValue={item.type && item.type.trim()}
                     rules={[{ required: false, message: '请填写文件夹名称!' }]}
                 >
                     <Input />
@@ -156,6 +156,14 @@ class TableOut extends React.Component {
                     name="apiUrl"
                     rules={[{ required: true, message: '请填写id!' }]}
                     initialValue={curPage.apiUrl}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    label="删除地址"
+                    name="deleteUrl"
+                    rules={[{ required: true, message: '请填写id!' }]}
+                    initialValue={curPage.deleteUrl}
                 >
                     <Input />
                 </Form.Item>
