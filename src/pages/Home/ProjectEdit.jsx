@@ -28,7 +28,7 @@ class ProjectEdit extends React.Component {
                     <h1 style={{ textAlign: 'center', position: 'absolute', top: 4, left: '48vw' }}>项目名:{cur.projectName}</h1>
                 </section>
                 <section className="center">
-                    <div className="drag">
+                    <div className="drag" style={{display: 'none'}}>
                         <DragoutView />
                         <DragInView />
                     </div>

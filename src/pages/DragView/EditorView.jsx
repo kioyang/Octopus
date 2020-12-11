@@ -42,13 +42,12 @@ class DragInView extends React.Component {
         const childRef = this.refs.tableOut;
         this.setState({ loading: true});
         childRef.dataTransfer().then((data) => {
-            console.log(data, 'dataTransfer');
             if (data) {
                 const { value } = data;
                 console.log(value, 'childValue');
                 const config = JSON.parse(localStorage.getItem('pageModel'));
                 const cur = JSON.parse(localStorage.getItem('curProject'));
-                const mergeConfig = Object.assign({},value, config, {baseDir: `${cur.projectDir}${cur.projectName}`,name: cur.projectName,tableColumns:value.tableColumns});
+                const mergeConfig = Object.assign({},value, config, {baseDir: `${cur.projectDir}${cur.projectName}`,name: cur.projectName,tableColumns:value.tableColumns,editColumns: value.editColumns || [],detailColumns: value.detailColumns || []});
                 this.saveLocal(mergeConfig, data);
                 message.loading('同步中');
                 fetch('/api/sp', { method: 'POST', body: JSON.stringify(mergeConfig)})
